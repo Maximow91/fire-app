@@ -6,7 +6,7 @@ import {
   NativeSyntheticEvent,
   ViewStyle,
 } from 'react-native';
-import {Paginator} from '../../../components/Paginaror/Paginator';
+import {Paginator} from '../../../components/Paginator';
 import {Slide} from '../../../types/types';
 import {SliderItem} from '../SliderItem/SliderItem';
 
