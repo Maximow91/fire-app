@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderColor: theme.color.borderGray,
     minHeight: 36,
+    backgroundColor: theme.color.white,
   },
   imageContainer: {
     borderWidth: 1,
@@ -68,5 +69,6 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 8,
     padding: 6,
     borderColor: theme.color.borderGray,
+    backgroundColor: theme.color.white,
   },
 });

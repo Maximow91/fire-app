@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {AppLogo} from '../../components/AppLogo';
-import {FormButton} from '../../components/FormButton';
+import {CustomButton} from '../../components/CustomButton';
 import {FormInput} from '../../components/FormInput';
+import {LinkButton} from '../../components/LinkButton';
 import {SvgIcon} from '../../components/SvgIcon';
 
 export const LoginScreen = () => {
@@ -34,30 +35,34 @@ export const LoginScreen = () => {
           multiline={false}
           autoCorrect={false}
         />
-        <FormButton onPress={() => {}} label="Sign In" style={styles.spacerL} />
-        <FormButton
+        <CustomButton
+          onPress={() => {}}
+          label="Sign In"
+          style={styles.spacerL}
+        />
+        <LinkButton
           onPress={() => {}}
           label="Forgot Password?"
-          style={styles.linkButton}
-          textStyle={styles.linkButtonText}
+          style={styles.forgotPassword}
+          textStyle={styles.bottomButtonText}
         />
-        <FormButton
+        <CustomButton
           onPress={() => {}}
           label="Sign In with Google"
           style={styles.spacerL}
           icon={<SvgIcon name="google" />}
         />
-        <FormButton
+        <CustomButton
           onPress={() => {}}
           label="Sign In with Facebook"
           style={styles.spacerS}
           icon={<SvgIcon name="google" />}
         />
-        <FormButton
+        <LinkButton
           onPress={() => {}}
           label="Don't have account? Create here"
-          style={styles.linkButton}
-          textStyle={styles.linkButtonText}
+          style={styles.bottomButton}
+          textStyle={styles.bottomButtonText}
         />
       </View>
     </View>
@@ -70,6 +75,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     alignItems: 'center',
     paddingTop: 32,
+    height: '100%',
   },
   linkButton: {
     marginTop: 24,
@@ -84,5 +90,17 @@ const styles = StyleSheet.create({
   },
   spacerS: {
     marginTop: 10,
+  },
+  bottomButton: {
+    position: 'absolute',
+    bottom: 32,
+  },
+  forgotPassword: {
+    marginTop: 16,
+  },
+  bottomButtonText: {
+    color: '#1111f5',
+    fontSize: 14,
+    fontWeight: 'bold',
   },
 });

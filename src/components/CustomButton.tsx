@@ -9,14 +9,14 @@ import {
 } from 'react-native';
 import {theme} from '../config/theme';
 
-interface FormButtonProps extends TouchableOpacityProps {
+interface CustomButtonProps extends TouchableOpacityProps {
   label: string;
   onPress: () => void;
   icon?: ReactNode;
   textStyle?: TextStyle;
 }
 
-export const FormButton = (props: FormButtonProps) => {
+export const CustomButton = (props: CustomButtonProps) => {
   const {label, onPress, icon, style, textStyle, ...otherProps} = props;
 
   return (
