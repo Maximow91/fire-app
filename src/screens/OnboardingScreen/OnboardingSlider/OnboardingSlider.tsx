@@ -20,6 +20,8 @@ export const OnboardingSlider = (props: OnboardingSliderProps) => {
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
+  console.log(currentIndex)
+
   const scrollX = useRef(new Animated.Value(0)).current;
 
   const scrollHandler = (e: NativeSyntheticEvent<NativeScrollEvent>) => {

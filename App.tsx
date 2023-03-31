@@ -1,13 +1,11 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
-import {LoginScreen} from './src/screens/LoginScreen';
-import {OnboardingScreen} from './src/screens/OnboardingScreen';
-import {SignupScreen} from './src/screens/SignupScreen';
+import {Navigator} from './src/navigation/Navigator';
 
 function App(): JSX.Element {
   return (
     <SafeAreaView style={styles.container}>
-      <LoginScreen />
+      <Navigator />
     </SafeAreaView>
   );
 }

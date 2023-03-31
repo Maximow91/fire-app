@@ -1,3 +1,5 @@
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {AppLogo} from '../../components/AppLogo';
@@ -5,10 +7,14 @@ import {CustomButton} from '../../components/CustomButton';
 import {FormInput} from '../../components/FormInput';
 import {LinkButton} from '../../components/LinkButton';
 import {SvgIcon} from '../../components/SvgIcon';
+import {RootStackParamList} from '../../navigation/Navigator';
 
 export const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
     <View style={styles.container}>
@@ -59,7 +65,9 @@ export const LoginScreen = () => {
           icon={<SvgIcon name="google" />}
         />
         <LinkButton
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate('SignUpScreen');
+          }}
           label="Don't have account? Create here"
           style={styles.bottomButton}
           textStyle={styles.bottomButtonText}
@@ -70,7 +78,7 @@ export const LoginScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1},
+  container: {flex: 1, backgroundColor: '#ededfc'},
   wrapper: {
     paddingHorizontal: 16,
     alignItems: 'center',

@@ -70,5 +70,7 @@ const styles = StyleSheet.create({
     padding: 6,
     borderColor: theme.color.borderGray,
     backgroundColor: theme.color.white,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

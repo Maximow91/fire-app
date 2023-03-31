@@ -1,13 +1,19 @@
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {CustomButton} from '../../components/CustomButton';
 import {FormInput} from '../../components/FormInput';
 import {LinkButton} from '../../components/LinkButton';
 import {SvgIcon} from '../../components/SvgIcon';
+import {RootStackParamList} from '../../navigation/Navigator';
 
 export const SignupScreen = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   //By Signing up, you agree to the Terms of Service and Privacy Policy
 
@@ -74,6 +80,9 @@ export const SignupScreen = () => {
           label="Have an account? Sign in"
           style={styles.bottomButton}
           textStyle={styles.bottomButtonText}
+          onPress={() => {
+            navigation.navigate('LoginScreen');
+          }}
         />
       </View>
     </View>
@@ -81,7 +90,10 @@ export const SignupScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1},
+  container: {
+    flex: 1,
+    backgroundColor: '#ededfc',
+  },
   wrapper: {
     paddingHorizontal: 16,
     alignItems: 'center',
