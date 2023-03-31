@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {OnboardingScreen} from '../screens/OnboardingScreen';
 import {LoginScreen} from '../screens/LoginScreen';
 import {SignupScreen} from '../screens/SignupScreen';
+import {TabNavigator} from './TabNavigator';
 
 export type RootStackParamList = {
   Tabs: undefined;
@@ -45,6 +46,10 @@ export const Navigator = () => {
           />
           <RootStack.Screen name="LoginScreen" component={LoginScreen} />
           <RootStack.Screen name="SignUpScreen" component={SignupScreen} />
+        </RootStack.Group>
+
+        <RootStack.Group screenOptions={{headerShown: false}}>
+          <RootStack.Screen name="Tabs" component={TabNavigator} />
         </RootStack.Group>
       </RootStack.Navigator>
     </NavigationContainer>

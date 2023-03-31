@@ -7,6 +7,7 @@ import {CustomButton} from '../../components/CustomButton';
 import {FormInput} from '../../components/FormInput';
 import {LinkButton} from '../../components/LinkButton';
 import {SvgIcon} from '../../components/SvgIcon';
+import {theme} from '../../config/theme';
 import {RootStackParamList} from '../../navigation/Navigator';
 
 export const LoginScreen = () => {
@@ -42,7 +43,9 @@ export const LoginScreen = () => {
           autoCorrect={false}
         />
         <CustomButton
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate('Tabs');
+          }}
           label="Sign In"
           style={styles.spacerL}
         />
@@ -78,7 +81,10 @@ export const LoginScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: '#ededfc'},
+  container: {
+    flex: 1,
+    backgroundColor: theme.color.mainPurple,
+  },
   wrapper: {
     paddingHorizontal: 16,
     alignItems: 'center',
