@@ -1,10 +1,6 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {CustomButton} from '../../components/CustomButton';
-import {RootStackParamList} from '../../navigation/Navigator';
+
 import {OnboardingSlider} from './OnboardingSlider/OnboardingSlider';
 
 const slides = [
@@ -26,21 +22,10 @@ const slides = [
 ];
 
 export const OnboardingScreen = () => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
   return (
     <View style={styles.container}>
       <OnboardingSlider style={styles.carousel} data={slides} />
-      <View style={styles.button}>
-        <CustomButton
-          label="Let's go"
-          onPress={() => {
-            AsyncStorage.setItem('isFirstStart', 'false');
-            navigation.navigate('LoginScreen');
-          }}
-        />
-      </View>
+      <View style={styles.button} />
     </View>
   );
 };

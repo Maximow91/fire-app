@@ -1,12 +1,19 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useRef, useState} from 'react';
 import {
   Animated,
   FlatList,
   NativeScrollEvent,
   NativeSyntheticEvent,
+  StyleSheet,
+  View,
   ViewStyle,
 } from 'react-native';
+import {CustomButton} from '../../../components/CustomButton';
 import {Paginator} from '../../../components/Paginator';
+import {RootStackParamList} from '../../../navigation/Navigator';
 import {Slide} from '../../../types/types';
 import {SliderItem} from '../SliderItem/SliderItem';
 
@@ -18,9 +25,12 @@ interface OnboardingSliderProps {
 export const OnboardingSlider = (props: OnboardingSliderProps) => {
   const {data, style} = props;
 
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  console.log(currentIndex)
+  console.log(currentIndex);
 
   const scrollX = useRef(new Animated.Value(0)).current;
 
@@ -59,6 +69,25 @@ export const OnboardingSlider = (props: OnboardingSliderProps) => {
         }}
       />
       <Paginator data={data} scrollX={scrollX} current={currentIndex} />
+      <View style={styles.button}>
+        {currentIndex === 2 && (
+          <CustomButton
+            label="Let's go"
+            onPress={() => {
+              AsyncStorage.setItem('isFirstStart', 'false');
+              navigation.navigate('LoginScreen');
+            }}
+          />
+        )}
+      </View>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  button: {
+    marginTop: 16,
+    paddingHorizontal: 16,
+    minHeight: 40,
+  },
+});
