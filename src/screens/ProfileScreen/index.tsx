@@ -1,17 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import auth from '@react-native-firebase/auth';
+import {useFirebase} from '../../hooks/useFirebase';
 
 export const ProfileScreen = () => {
-  const navigation = useNavigation();
-  const logoutHandler = async () => {
-    await auth()
-      .signOut()
-      .then(() => {
-        console.log('User signed out!');
-        navigation.navigate('LoginScreen');
-      });
+  const {logout} = useFirebase();
+
+  const logoutHandler = () => {
+    logout();
   };
 
   return (

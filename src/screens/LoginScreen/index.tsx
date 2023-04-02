@@ -9,31 +9,18 @@ import {LinkButton} from '../../components/LinkButton';
 import {SvgIcon} from '../../components/SvgIcon';
 import {theme} from '../../config/theme';
 import {RootStackParamList} from '../../navigation/Navigator';
-import auth from '@react-native-firebase/auth';
+import {useFirebase} from '../../hooks/useFirebase';
 
 export const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
+  const {login} = useFirebase();
+
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const login = async (email: string, password: string) => {
-    await auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        console.log('User signed in!');
-        navigation.navigate('Tabs');
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  };
-
   const loginHandler = () => {
-    console.log('login');
-    console.log('email', email);
-    console.log('password', password);
     login(email, password);
   };
 

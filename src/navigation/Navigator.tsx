@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -6,6 +6,8 @@ import {OnboardingScreen} from '../screens/OnboardingScreen';
 import {LoginScreen} from '../screens/LoginScreen';
 import {SignupScreen} from '../screens/SignupScreen';
 import {TabNavigator} from './TabNavigator';
+import {CommonStoreContext} from '../strore/CommonStore';
+import {observer} from 'mobx-react-lite';
 
 export type RootStackParamList = {
   Tabs: undefined;
@@ -16,9 +18,11 @@ export type RootStackParamList = {
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
-export const Navigator = ({user}) => {
+export const Navigator = observer(() => {
   const [initialRouteName, setInitialRouteName] =
     useState<keyof RootStackParamList>();
+
+  const {user} = useContext(CommonStoreContext);
 
   useEffect(() => {
     AsyncStorage.getItem('isFirstStart').then(value => {
@@ -57,4 +61,4 @@ export const Navigator = ({user}) => {
       </RootStack.Navigator>
     </NavigationContainer>
   );
-};
+});

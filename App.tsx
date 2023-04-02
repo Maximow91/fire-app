@@ -4,10 +4,10 @@ import {Navigator} from './src/navigation/Navigator';
 
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {CommonStoreContext} from './src/strore/CommonStore';
+import {theme} from './src/config/theme';
 
 function App() {
   const [initializing, setInitializing] = useState<Boolean>(true);
-  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
 
   const commonStore = useContext(CommonStoreContext);
 
@@ -29,7 +29,7 @@ function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Navigator user={user} />
+      <Navigator />
     </SafeAreaView>
   );
 }
@@ -37,7 +37,7 @@ function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ededfc',
+    backgroundColor: theme.color.mainPurple,
   },
 });
 
