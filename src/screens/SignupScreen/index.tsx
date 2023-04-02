@@ -8,14 +8,42 @@ import {LinkButton} from '../../components/LinkButton';
 import {SvgIcon} from '../../components/SvgIcon';
 import {RootStackParamList} from '../../navigation/Navigator';
 
+import auth from '@react-native-firebase/auth';
+
 export const SignupScreen = () => {
   const [password, setPassword] = useState('');
+  const [confirnedPassword, setConfirmedPassword] = useState('');
   const [email, setEmail] = useState('');
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  //By Signing up, you agree to the Terms of Service and Privacy Policy
+  const register = async (email: string, password: string) => {
+    await auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        console.log('User account created & signed in!');
+        navigation.navigate('Tabs');
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        console.error(error);
+      });
+  };
+
+  const registerHandler = () => {
+    console.log('register');
+    console.log('email', email);
+    console.log('password', password);
+    register(email, password);
+  };
 
   return (
     <View style={styles.container}>
@@ -43,8 +71,8 @@ export const SignupScreen = () => {
           autoCorrect={false}
         />
         <FormInput
-          value={password}
-          onChangeText={text => setPassword(text)}
+          value={confirnedPassword}
+          onChangeText={text => setConfirmedPassword(text)}
           placeholder="confirm password"
           icon={<SvgIcon name="lock" />}
           containerStyle={styles.input}
@@ -54,7 +82,7 @@ export const SignupScreen = () => {
           autoCorrect={false}
         />
         <CustomButton
-          onPress={() => {}}
+          onPress={registerHandler}
           label="Sign Up"
           style={styles.spacerL}
         />

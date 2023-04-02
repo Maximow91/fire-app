@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "704666141293",
+    "project_id": "fire-app-8a8f7",
+    "storage_bucket": "fire-app-8a8f7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704666141293:android:4ba3a2679250bac084b564",
+        "android_client_info": {
+          "package_name": "com.fireapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704666141293-thqhumc700dqldho0abo53488jmlnuba.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfEPfNAIzeSUul8zZ5KixMtzA6DS6ee5c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "704666141293-thqhumc700dqldho0abo53488jmlnuba.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "704666141293-jchb58ln772ev1s3pi0o41avsmtjqckb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.FireApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -9,6 +9,7 @@ import {LinkButton} from '../../components/LinkButton';
 import {SvgIcon} from '../../components/SvgIcon';
 import {theme} from '../../config/theme';
 import {RootStackParamList} from '../../navigation/Navigator';
+import auth from '@react-native-firebase/auth';
 
 export const LoginScreen = () => {
   const [password, setPassword] = useState('');
@@ -16,6 +17,25 @@ export const LoginScreen = () => {
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const login = async (email: string, password: string) => {
+    await auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        console.log('User signed in!');
+        navigation.navigate('Tabs');
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  const loginHandler = () => {
+    console.log('login');
+    console.log('email', email);
+    console.log('password', password);
+    login(email, password);
+  };
 
   return (
     <View style={styles.container}>
@@ -43,9 +63,7 @@ export const LoginScreen = () => {
           autoCorrect={false}
         />
         <CustomButton
-          onPress={() => {
-            navigation.navigate('Tabs');
-          }}
+          onPress={loginHandler}
           label="Sign In"
           style={styles.spacerL}
         />

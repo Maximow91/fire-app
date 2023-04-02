@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -16,16 +16,19 @@ export type RootStackParamList = {
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
-export const Navigator = () => {
+export const Navigator = ({user}) => {
   const [initialRouteName, setInitialRouteName] =
     useState<keyof RootStackParamList>();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     AsyncStorage.getItem('isFirstStart').then(value => {
       if (value === null) {
         setInitialRouteName('OnboardingScreen');
       }
       if (value === 'false') {
+        if (user) {
+          setInitialRouteName('Tabs');
+        }
         setInitialRouteName('LoginScreen');
       }
     });

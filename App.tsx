@@ -1,11 +1,33 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import {Navigator} from './src/navigation/Navigator';
 
-function App(): JSX.Element {
+import auth from '@react-native-firebase/auth';
+
+function App() {
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  function onAuthStateChanged(user: any) {
+    setUser(user);
+    if (initializing) {
+      setInitializing(false);
+    }
+  }
+
+  useEffect(() => {
+    console.log('useEff');
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) {
+    return null;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
-      <Navigator />
+      <Navigator user={user} />
     </SafeAreaView>
   );
 }
