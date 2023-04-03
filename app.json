@@ -1,4 +1,6 @@
 {
   "name": "FireApp",
-  "displayName": "FireApp"
+  "displayName": "FireApp",
+  "plugins": ["@react-native-google-signin/google-signin"]
+
 }

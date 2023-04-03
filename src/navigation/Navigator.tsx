@@ -8,6 +8,7 @@ import {SignupScreen} from '../screens/SignupScreen';
 import {TabNavigator} from './TabNavigator';
 import {CommonStoreContext} from '../strore/CommonStore';
 import {observer} from 'mobx-react-lite';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 export type RootStackParamList = {
   Tabs: undefined;
@@ -35,6 +36,10 @@ export const Navigator = observer(() => {
         }
         setInitialRouteName('LoginScreen');
       }
+    });
+    GoogleSignin.configure({
+      webClientId:
+        '704666141293-ii3i0baa2amtgcp238u4g57658f47cdo.apps.googleusercontent.com',
     });
   }, []);
 

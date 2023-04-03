@@ -1,13 +1,10 @@
-import {useContext} from 'react';
-import {CommonStoreContext} from '../strore/CommonStore';
 import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../navigation/Navigator';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 export const useFirebase = () => {
-  const commonStore = useContext(CommonStoreContext);
-
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -63,5 +60,27 @@ export const useFirebase = () => {
       });
   };
 
-  return {registration, login, logout};
+  const googleLogin = async () => {
+    try {
+      console.log('login');
+      await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+      // Get the users ID token
+      const {idToken} = await GoogleSignin.signIn();
+
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+      // Sign-in the user with the credential
+      await auth()
+        .signInWithCredential(googleCredential)
+        .then(() => {
+ 
+          navigation.navigate('Tabs');
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return {registration, login, logout, googleLogin};
 };

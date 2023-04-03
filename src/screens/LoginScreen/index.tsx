@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import {AppLogo} from '../../components/AppLogo';
 import {CustomButton} from '../../components/CustomButton';
 import {FormInput} from '../../components/FormInput';
@@ -15,13 +15,17 @@ export const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
-  const {login} = useFirebase();
+  const {login, googleLogin} = useFirebase();
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const loginHandler = () => {
     login(email, password);
+  };
+
+  const loginWithGoogleHandler = () => {
+    googleLogin();
   };
 
   return (
@@ -60,18 +64,23 @@ export const LoginScreen = () => {
           style={styles.forgotPassword}
           textStyle={styles.bottomButtonText}
         />
-        <CustomButton
-          onPress={() => {}}
-          label="Sign In with Google"
-          style={styles.spacerL}
-          icon={<SvgIcon name="google" />}
-        />
-        <CustomButton
-          onPress={() => {}}
-          label="Sign In with Facebook"
-          style={styles.spacerS}
-          icon={<SvgIcon name="google" />}
-        />
+        {Platform.OS === 'android' ? (
+          <>
+            <CustomButton
+              onPress={loginWithGoogleHandler}
+              label="Sign In with Google"
+              style={styles.spacerL}
+              icon={<SvgIcon name="google" />}
+            />
+            <CustomButton
+              onPress={() => {}}
+              label="Sign In with Facebook"
+              style={styles.spacerS}
+              icon={<SvgIcon name="google" />}
+            />
+          </>
+        ) : null}
+
         <LinkButton
           onPress={() => {
             navigation.navigate('SignUpScreen');
